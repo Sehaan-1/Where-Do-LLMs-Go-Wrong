@@ -1,0 +1,53 @@
+<View>
+  <Style>
+    .htx-text { white-space: pre-wrap; }
+  </Style>
+
+  <Header value="Reminder: only the earliest invalid step is first_error; mark later consequences as downstream_error." />
+
+  <Header value="Question" />
+  <Text name="question" value="$question" />
+
+  <Header value="Reference answer" />
+  <Text name="reference_answer" value="$reference_answer" />
+
+  <Header value="Prior steps" />
+  <Text name="prior_steps" value="$prior_steps" />
+
+  <Header value="Target step" />
+  <Text name="current_step" value="$current_step" />
+
+  <Header value="Following steps" />
+  <Text name="following_steps" value="$following_steps" />
+
+  <Choices name="status" toName="current_step" choice="single" showInline="true" required="true">
+    <Choice value="correct" />
+    <Choice value="first_error" />
+    <Choice value="downstream_error" />
+    <Choice value="uncertain" />
+  </Choices>
+
+  <Choices
+    name="error_type"
+    toName="current_step"
+    choice="single"
+    showInline="false"
+    required="true"
+    visibleWhen="choice-selected"
+    whenTagName="status"
+    whenChoiceValue="first_error">
+    <Choice value="arithmetic_error" />
+    <Choice value="misread_or_omission" />
+    <Choice value="invalid_inference" />
+    <Choice value="unsupported_claim" />
+    <Choice value="unit_or_scale_error" />
+    <Choice value="irrelevant_or_redundant" />
+    <Choice value="answer_reporting_error" />
+  </Choices>
+
+  <TextArea
+    name="rationale"
+    toName="current_step"
+    rows="3"
+    placeholder="Optional: explain an uncertain or debatable judgment" />
+</View>

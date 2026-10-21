@@ -1,0 +1,3 @@
+# Local human annotations
+
+Store one normalized JSONL file per pseudonymous annotator in this directory. Files are ignored by Git to protect independent judgments and prevent accidental disclosure. Do not put names, email addresses, access tokens, or private notes in these files. Preserve original exports and do not overwrite an earlier annotation round; use a new filename and guideline version for revisions. See `docs/data-contract.md` and `docs/annotation_guidelines.md`.

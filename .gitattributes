@@ -1,0 +1,2 @@
+# PDFs are generated binary artifacts; keep Git whitespace checks/diffs from parsing their internals.
+*.pdf binary
