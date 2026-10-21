@@ -1,0 +1,334 @@
+@media (max-width: 900px) {
+  .hero__bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__actions {
+    justify-self: start;
+  }
+
+  .section-intro h2,
+  .section-intro > p,
+  .section-intro .section-note {
+    grid-column: 1 / -1;
+  }
+
+  .section-intro > p,
+  .section-intro .section-note {
+    max-width: 60ch;
+  }
+
+  .task-controls {
+    grid-column: 1 / span 4;
+  }
+
+  .task-card {
+    grid-column: 5 / -1;
+  }
+
+  .workflow-copy {
+    grid-column: 1 / span 5;
+  }
+
+  .workflow-panel {
+    grid-column: 6 / -1;
+  }
+
+  .seed-intro,
+  .limits-heading,
+  .faq-intro {
+    grid-column: 1 / span 5;
+  }
+
+  .seed-table,
+  .limits-list,
+  .limits-links,
+  .faq-list {
+    grid-column: 6 / -1;
+  }
+}
+
+@media (max-width: 650px) {
+  :root {
+    --margin: 1.125rem;
+    --gutter: 1rem;
+    --text-display: clamp(3rem, 13vw, 4.25rem);
+    --text-heading: clamp(2rem, 9vw, 3rem);
+  }
+
+  .site-header {
+    min-height: 4.75rem;
+    padding-block: 0.8rem;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    position: relative;
+    display: block;
+    font-size: 1rem;
+  }
+
+  .mobile-nav summary {
+    min-width: 4.5rem;
+    min-height: 44px;
+    padding: 0.55rem 0.2rem;
+    text-align: right;
+  }
+
+  .mobile-nav nav {
+    position: absolute;
+    z-index: 5;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    display: grid;
+    min-width: 13rem;
+    gap: 0.35rem;
+    padding: 1rem;
+    background: #ffffff;
+    color: var(--ink);
+  }
+
+  .mobile-nav nav a {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    padding-inline: 0.5rem;
+  }
+
+  .hero {
+    min-height: calc(100svh - 4.75rem);
+  }
+
+  .hero__blue-field {
+    inset-block-start: 43%;
+  }
+
+  .hero__inner {
+    min-height: inherit;
+    padding-block: clamp(3rem, 8vh, 5rem) 2rem;
+  }
+
+  .hero__title {
+    max-width: 100%;
+    font-size: var(--text-display);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+
+  .hero__line--blue {
+    min-height: 1.2em;
+    flex-wrap: wrap;
+    row-gap: 0.08em;
+  }
+
+  .hero__step-window {
+    width: 2.25em;
+    min-height: 0.85em;
+  }
+
+  .hero__bottom {
+    gap: 1rem;
+  }
+
+  .hero__support {
+    max-width: 34ch;
+    font-size: clamp(1.25rem, 5.5vw, 1.5rem);
+  }
+
+  .hero__actions {
+    display: grid;
+    justify-items: start;
+    gap: 0.8rem;
+  }
+
+  .section {
+    padding-block: 5rem;
+  }
+
+  .section-intro {
+    display: block;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-intro > p {
+    margin-top: 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  .section-intro .section-note {
+    margin-top: 0.75rem;
+  }
+
+  .task-workspace,
+  .workflow-section,
+  .seed-section,
+  .limits-section,
+  .faq-section {
+    display: block;
+  }
+
+  .task-controls {
+    margin-bottom: 2rem;
+  }
+
+  .task-card {
+    padding: 1rem;
+  }
+
+  .task-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .task-field--question,
+  .task-field--target {
+    grid-column: auto;
+  }
+
+  .task-control-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .control-button {
+    padding-inline: 0.6rem;
+    font-size: 0.95rem;
+  }
+
+  .workflow-copy {
+    margin-bottom: 2.5rem;
+  }
+
+  .workflow-panel {
+    padding: 1.1rem;
+  }
+
+  .workflow-facts {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .seed-intro {
+    position: static;
+    margin-bottom: 2.5rem;
+  }
+
+  .seed-table {
+    font-size: 1rem;
+  }
+
+  .seed-table th,
+  .seed-table td {
+    padding: 0.9rem 0.4rem;
+  }
+
+  .seed-table th {
+    width: 32%;
+    font-size: 0.95rem;
+  }
+
+  .seed-table td:nth-child(2) {
+    width: 20%;
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+
+  .seed-table td:nth-child(3) {
+    width: 48%;
+  }
+
+  .limits-heading,
+  .faq-intro {
+    margin-bottom: 2.5rem;
+  }
+
+  .limits-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .limits-links {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .faq-list details {
+    padding-block: 1rem;
+  }
+
+  .faq-list details[open] {
+    padding: 1rem;
+  }
+
+  .site-footer {
+    padding-block: 4rem 1.5rem;
+  }
+
+  .site-footer__top {
+    display: block;
+    padding-bottom: 4rem;
+  }
+
+  .site-footer__top h2 {
+    max-width: 9ch;
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+  .site-footer__top p {
+    margin-top: 1.25rem;
+    font-size: 1.2rem;
+  }
+
+  .site-footer__bottom {
+    display: block;
+  }
+
+  .site-footer__bottom nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 1rem;
+  }
+
+  .site-footer__bottom nav a {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .site-footer__scope {
+    margin-top: 1.5rem;
+  }
+
+  .legal-main {
+    padding-block: 3rem 5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero__line--blue {
+    justify-content: flex-start;
+  }
+
+  .hero__step-window {
+    width: 2.2em;
+  }
+
+  .seed-table th,
+  .seed-table td {
+    padding-inline: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
