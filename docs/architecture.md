@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Create a compact process-supervision dataset: annotate the earliest invalid reasoning step in a model response, while retaining per-step status and source provenance. The baseline is reproducible without API keys, hosted services, or an internet connection at runtime.
+Create a compact process-supervision dataset: annotate the earliest invalid reasoning step in a model response, while retaining per-step status and source provenance. The Python baseline is reproducible without API keys, hosted services, or an internet connection at runtime. A separate static project site in `site/` presents verified project facts and read-only previews; it is not an annotation service.
 
 ## System context and flows
 
@@ -12,6 +12,7 @@ Create a compact process-supervision dataset: annotate the earliest invalid reas
 4. The export adapter makes one Label Studio task per record-step. The task shows the prompt, reference answer, prior/current/following text, but does not display model identity or the source's correctness flag.
 5. Human labels are imported as independent, pseudonymous annotation files. Annotation status transitions are validated before storage.
 6. Agreement compares aligned annotations; analysis reports response-level source accuracy separately from human first-error types.
+7. The static site presents the current seed status, method, limitations, and policy notes. It serves no annotation writes or user data and links to the repository for full documentation.
 
 ## Component boundaries
 
@@ -23,6 +24,7 @@ Create a compact process-supervision dataset: annotate the earliest invalid reas
 | Label Studio adapter | Task projection and export normalization | Label Studio server, users, identity management |
 | Agreement/analysis | Metrics over validated annotations | Adjudication or claims about unannotated records |
 | CLI | Arguments, error context, command composition | Domain rules hidden in command handlers |
+| Static project site | Read-only presentation of verified project facts, task/workflow previews, and policy notices | Annotation writes, accounts, telemetry, cookies, remote assets, or backend services |
 
 ## State and invariants
 
@@ -52,4 +54,6 @@ These boundaries localize failures to one command and one output. The system has
 
 ## Security and privacy
 
-There is no public service or network listener. Paths are explicit; input JSON and Label Studio exports are validated. `wdlw --verbose` writes JSON transition events to stderr with a per-invocation correlation ID; events contain command/count/error context, never prompts, traces, or rationale. Annotator IDs should be pseudonyms. Do not store names, email addresses, access tokens, or private notes. The task projection deliberately withholds model identity and source correctness to reduce anchoring.
+The Python toolkit has no public service or network listener. Paths are explicit; input JSON and Label Studio exports are validated. `wdlw --verbose` writes JSON transition events to stderr with a per-invocation correlation ID; events contain command/count/error context, never prompts, traces, or rationale. Annotator IDs should be pseudonyms. Do not store names, email addresses, access tokens, or private notes. The task projection deliberately withholds model identity and source correctness to reduce anchoring.
+
+The static site has no server-side state, data-entry form, analytics, cookie, browser persistence, third-party embed, or external subresource. Its Content Security Policy blocks cross-origin subresource connections and form submissions. Hosting providers may still process ordinary request logs; the privacy page says this explicitly. Any future form, tracking, or remote asset requires review of data minimization, consent where applicable, security, policy copy, and the deployment jurisdiction before launch.

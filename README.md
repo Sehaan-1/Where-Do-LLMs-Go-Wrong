@@ -10,7 +10,7 @@ No model API is called and no credentials are needed. The source traces are hist
 
 ## Quick start
 
-Python 3.11+ is required.
+Python 3.11+ is required. Node.js is used only for the optional frontend JavaScript syntax check; the site preview itself needs no Node runtime.
 
 ```bash
 python3 -m venv .venv
@@ -19,9 +19,22 @@ python3 -m venv .venv
 .venv/bin/ruff check .
 .venv/bin/mypy --strict src/wdlw tests scripts
 .venv/bin/pytest -q
+node --check site/assets/site.js
 .venv/bin/python scripts/render_guidelines.py
 .venv/bin/python -m wdlw --help
 ```
+
+### Static project website
+
+The frontend in `site/` is plain HTML, CSS, and JavaScript. It is a read-only project introduction and task preview, not a submission form or a replacement for Label Studio. It makes no analytics or third-party asset requests, sets no cookies, and stores no annotations.
+
+Preview it from the repository root:
+
+```bash
+python3 -m http.server 4173 --bind 0.0.0.0 --directory site
+```
+
+The [privacy notice](site/privacy.html), [terms and refund notice](site/terms.html), and [frontend design notes](docs/frontend_design.md) explain the site’s data behavior, scope, and design decisions. No goods or paid services are offered, so refunds do not apply.
 
 Validate the committed seed batch and export all step tasks for Label Studio. Add `--verbose` before the subcommand to emit structured JSON run events with a correlation ID to stderr (no prompt or trace text is logged):
 

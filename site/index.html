@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#eef0f3" />
+    <meta
+      name="description"
+      content="A reproducible pilot for annotating the first invalid line in historical GSM8K reasoning traces. The seed has no human labels yet."
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <title>Where Do LLMs Go Wrong? — step-level annotation pilot</title>
+    <link rel="stylesheet" href="assets/site.css" />
+    <link rel="stylesheet" href="assets/site-responsive.css" />
+    <script defer src="assets/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="wordmark" href="index.html" aria-label="Where Do LLMs Go Wrong? home">
+        <span>Where Do LLMs</span>
+        <span>Go Wrong?</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#method">Method</a>
+        <a href="#seed">Seed</a>
+        <a href="#limits">Limits</a>
+        <a class="nav-action" href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/blob/main/docs/annotation_runbook.md">
+          Read the runbook
+        </a>
+      </nav>
+
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          <a href="#method">Method</a>
+          <a href="#seed">Seed</a>
+          <a href="#limits">Limits</a>
+          <a href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/blob/main/docs/annotation_runbook.md">Read the runbook</a>
+        </nav>
+      </details>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero__blue-field" aria-hidden="true"></div>
+        <div class="hero__inner">
+          <h1 class="hero__title" id="hero-title">
+            <span class="hero__line">Find the first</span>
+            <span class="hero__line hero__line--blue">
+              <span>wrong step.</span>
+              <span class="hero__step-window" data-ui aria-hidden="true">
+                <span class="hero__step-label">source line</span>
+                <code>A: 26</code>
+              </span>
+            </span>
+          </h1>
+
+          <div class="hero__bottom">
+            <p class="hero__support">
+              A reproducible pilot for annotating the earliest invalid line in historical GSM8K reasoning traces.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--light" href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/blob/main/docs/annotation_runbook.md">
+                Read the annotation runbook
+              </a>
+              <a class="text-link text-link--light" href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/blob/main/data/README.md">
+                View the dataset card
+              </a>
+            </div>
+            <p class="hero__status">
+              No human step labels have been collected. Agreement scores and first-error findings are pending.
+            </p>
+            <p class="hero__sample-note">
+              The small line is an unannotated excerpt from the pinned source; no judgment is shown.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--paper task-section" id="method" aria-labelledby="task-heading">
+        <div class="section-intro">
+          <h2 id="task-heading">One line. Full context.</h2>
+          <p>
+            The labeling unit is a non-empty response line. The task preview shows the question, reference answer,
+            surrounding steps, and one target line. It does not show model identity or the source correctness flag.
+          </p>
+          <p class="section-note">Preview only. Nothing is submitted, stored, or sent from this page.</p>
+        </div>
+
+        <div class="task-workspace">
+          <div class="task-controls">
+            <h3>Move through the response</h3>
+            <p id="preview-position" class="task-position" aria-live="polite">
+              Source line 1 of 3. No label is selected.
+            </p>
+            <div class="task-control-buttons" role="group" aria-label="Sample response navigation" hidden>
+              <button class="control-button" id="previous-line" type="button" disabled>
+                Show previous line
+              </button>
+              <button class="control-button" id="next-line" type="button">
+                Show next line
+              </button>
+            </div>
+            <p class="section-note">
+              These controls only change the example in this browser. They are not an annotation form.
+            </p>
+          </div>
+
+          <figure class="task-card" data-ui aria-labelledby="task-card-title">
+            <figcaption class="task-card__topline">
+              <h3 id="task-card-title">Task preview</h3>
+              <span class="task-card__state">Unlabeled</span>
+            </figcaption>
+            <dl class="task-fields">
+              <div class="task-field task-field--question">
+                <dt>Question</dt>
+                <dd id="sample-question">
+                  Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?
+                </dd>
+              </div>
+              <div class="task-field">
+                <dt>Reference answer</dt>
+                <dd id="sample-answer">18</dd>
+              </div>
+              <div class="task-field">
+                <dt>Prior steps</dt>
+                <dd id="sample-prior">No earlier lines in this response.</dd>
+              </div>
+              <div class="task-field task-field--target">
+                <dt>Target step</dt>
+                <dd id="sample-current">Janet eats 3 ducks eggs for breakfast every morning and she sells the rest so she has 16 - 3 = &lt;&lt;16-3=13&gt;&gt;13 ducks eggs left</dd>
+              </div>
+              <div class="task-field">
+                <dt>Following steps</dt>
+                <dd id="sample-following">She has 13 ducks eggs and she sells 2 each day so she makes 13 * 2 = $&lt;&lt;13*2=26&gt;&gt;26<br />A: 26</dd>
+              </div>
+            </dl>
+            <div class="task-labels">
+              <p>Status choices in the annotation interface</p>
+              <ul aria-label="Unselected status choices">
+                <li>correct</li>
+                <li>first_error</li>
+                <li>downstream_error</li>
+                <li>uncertain</li>
+              </ul>
+              <p class="task-card__note">None is selected. This is source text, not an annotation result.</p>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section section--field workflow-section" aria-labelledby="workflow-heading">
+        <div class="workflow-copy">
+          <h2 id="workflow-heading">From source to agreement</h2>
+          <p>
+            The tools are ready for a human pilot. The final two stages are still waiting on independent annotation.
+          </p>
+          <div class="workflow-controls" id="workflow-controls" hidden>
+            <label class="range-label" for="workflow-stage">Explore the pilot stages</label>
+            <input
+              class="stage-range"
+              id="workflow-stage"
+              type="range"
+              min="0"
+              max="3"
+              step="1"
+              value="0"
+              aria-valuetext="Pinned source"
+              aria-controls="workflow-panel"
+              aria-describedby="workflow-local-note"
+            />
+            <ol class="stage-labels" aria-label="Pilot stage names">
+              <li>Source</li>
+              <li>Prepare</li>
+              <li>Annotate</li>
+              <li>Compare</li>
+            </ol>
+            <p class="section-note" id="workflow-local-note">
+              This control changes a local preview only. It does not collect or send information.
+            </p>
+          </div>
+        </div>
+
+        <figure class="workflow-panel" id="workflow-panel" data-ui aria-labelledby="workflow-stage-title">
+          <figcaption class="workflow-panel__caption">
+            <span>Study workflow</span>
+            <span id="workflow-count">Stage 1 of 4</span>
+          </figcaption>
+          <h3 id="workflow-stage-title" aria-live="polite">Pinned source</h3>
+          <p id="workflow-stage-copy" class="workflow-panel__copy">
+            The batch comes from one recorded GSM8K revision. Preparation makes no model API calls.
+          </p>
+          <dl class="workflow-facts">
+            <div>
+              <dt id="workflow-fact-label-1">Source rows</dt>
+              <dd id="workflow-fact-value-1">1,319</dd>
+            </div>
+            <div>
+              <dt id="workflow-fact-label-2">Source revision</dt>
+              <dd id="workflow-fact-value-2">3101c7d</dd>
+            </div>
+            <div>
+              <dt id="workflow-fact-label-3">Model API calls</dt>
+              <dd id="workflow-fact-value-3">None</dd>
+            </div>
+          </dl>
+        </figure>
+      </section>
+
+      <section class="section section--paper seed-section" id="seed" aria-labelledby="seed-heading">
+        <div class="seed-intro">
+          <h2 id="seed-heading">The seed is small by design.</h2>
+          <p>
+            These are inventory counts from the prepared batch, not human judgments or claims about current models.
+          </p>
+          <a class="text-link" href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/blob/main/data/manifest.json">
+            Read the provenance manifest
+          </a>
+        </div>
+
+        <table class="seed-table" data-ui>
+          <caption>Prepared seed batch counts</caption>
+          <tbody>
+            <tr>
+              <th scope="row">Problems</th>
+              <td>150</td>
+              <td>paired GSM8K test questions</td>
+            </tr>
+            <tr>
+              <th scope="row">Responses</th>
+              <td>300</td>
+              <td>two historical source conditions per problem</td>
+            </tr>
+            <tr>
+              <th scope="row">Line units</th>
+              <td>1,355</td>
+              <td>non-empty source lines; approximate step boundaries</td>
+            </tr>
+            <tr>
+              <th scope="row">Human labels</th>
+              <td>0</td>
+              <td>not collected; no agreement result exists</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section section--dark limits-section" id="limits" aria-labelledby="limits-heading">
+        <div class="limits-heading">
+          <h2 id="limits-heading">Read the limits first.</h2>
+          <p>
+            This seed supports tooling and a small annotation pilot. It is not a current-model benchmark or a completed study.
+          </p>
+        </div>
+        <ul class="limits-list">
+          <li>
+            <h3>Historical traces</h3>
+            <p>Released `6b_finetuning` and `175b_finetuning` GSM8K traces; no new model generations.</p>
+          </li>
+          <li>
+            <h3>No step labels yet</h3>
+            <p>Upstream `answer_correct` is source metadata, not a human step judgment.</p>
+          </li>
+          <li>
+            <h3>Line-based units</h3>
+            <p>Non-empty newlines are practical annotation units, not guaranteed semantic steps.</p>
+          </li>
+          <li>
+            <h3>Benchmark overlap</h3>
+            <p>GSM8K is public and may overlap model training data; broad capability claims are out of scope.</p>
+          </li>
+        </ul>
+        <div class="limits-links">
+          <a class="text-link text-link--light" href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/blob/main/docs/datasheet.md">
+            Read the datasheet
+          </a>
+          <a class="text-link text-link--light" href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/blob/main/docs/pilot_report.md">
+            Read the pre-annotation report
+          </a>
+        </div>
+      </section>
+
+      <section class="section section--paper faq-section" aria-labelledby="faq-heading">
+        <div class="faq-intro">
+          <h2 id="faq-heading">Questions before reuse.</h2>
+          <p>Answers are limited to what the repository and current seed actually establish.</p>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Has the seed been human-annotated?</summary>
+            <p>No. The batch has no human step labels; no Cohen’s kappa or first-error findings are reported.</p>
+          </details>
+          <details>
+            <summary>Which model outputs are included?</summary>
+            <p>
+              Historical GSM8K release traces under `6b_finetuning` and `175b_finetuning`, sampled from a pinned
+              source revision. They are not fresh generations and are not representative of current models.
+            </p>
+          </details>
+          <details>
+            <summary>Does this page collect annotation decisions?</summary>
+            <p>
+              No. The sample controls are read-only previews. Actual annotation uses the separate Label Studio
+              workflow described in the runbook.
+            </p>
+          </details>
+          <details>
+            <summary>How can I reproduce the seed?</summary>
+            <p>
+              Use the pinned GSM8K revision, manifest, and offline preparation command in the repository README.
+              The project makes no implicit network calls to model providers.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="contact">
+      <div class="site-footer__top">
+        <h2>Where Do LLMs Go Wrong?</h2>
+        <p>A research pilot and offline annotation toolkit.</p>
+      </div>
+      <div class="site-footer__bottom">
+        <nav aria-label="Project and policy links">
+          <a href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong">Project repository</a>
+          <a href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/issues">Contact via GitHub issues</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms of use and refunds</a>
+          <a href="https://github.com/Sehaan-1/Where-Do-LLMs-Go-Wrong/blob/main/THIRD_PARTY_NOTICES.md">Source attribution</a>
+        </nav>
+        <p class="site-footer__scope">
+          No business, paid service, or annotation submission is operated by this static page.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
